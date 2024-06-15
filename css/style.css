@@ -369,11 +369,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	-moz-box-sizing: border-box; 
 	-ms-box-sizing: border-box; 
 	box-sizing: border-box; 
-	float: left; 
+	float: right; 
 	margin-left: 2.127659574%; 
 	*margin-left: 2.0744680846382977%; 
 }
-.fluid [class*="grid"]:first-child { margin-left: 0; }
+
 .fluid .grid12 { width: 100%; *width: 99.94680851063829%; }
 .fluid .grid11 { width: 91.48936170212765%; *width: 91.43617021276594%; }
 .fluid .grid10 { width: 82.97872340425532%; *width: 82.92553191489361%; }
