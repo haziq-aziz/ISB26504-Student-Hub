@@ -1,109 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Novus Admin Theme | Login</title>
-
-		<link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-ipad-retina.png"/>
-		<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-iphone-retina.png"/>
-		<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-ipad.png"/>
-		<link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-iphone.png"/>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-
-		<!-- bootstrap -->
-		<link href="css/bootstrap/bootstrap.css" rel="stylesheet"/>
-
-		<link rel="stylesheet" href="css/font-awesome-4.0.3/css/font-awesome.min.css">
-		<link rel="stylesheet" href="css/jquery-ui.css"/>
-
-		<link href="css/style.css" rel="stylesheet" type="text/css"/>
-
-	</head>
-	<body>
-		<div id="loading">
-			<div>
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
-		</div>
-		<div id="wrapper" class="login">
-
-			<div id="top">
-				<div id="topBar" class="clearfix widget-content pad10">
-					<a class="logo" href="index.html">
-						<img src="images/logo.png" rel="logo">
-					</a>
-					<div class="topNav clearfix">
-						<ul class="tNav clearfix">
-							<li>
-								<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-									<i class="fa fa-gear icon-white"></i>
-								</a>
-								<ul class="dropdown-menu pull-right">
-									<li>
-										<a href="#">
-											<i class="fa fa-pencil"></i> Edit</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-trash-o"></i> Delete</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-ban"></i> Ban</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#"> Other actions</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<!-- /topNav -->
-				</div>
-				<!-- /topBar -->
-
-			</div>
-			<!-- /top -->
-
-			<div class="widget-content pad20 clearfix">
-				<div class="userImg">
-					<img src="images/user.jpg" rel="user">
-				</div>
-				<h3 class="center">Michael Williams</h3>
-				<span class="center light">Login</span>
-				<input type="email" class="input-text" placeholder="Username"/>
-				<input type="password" class="input-text" placeholder="Password"/>
-				<span class="custom-input center">
-					<a class="btn btn-blue btn-full" href="index.html">Login</a>
-					<input type="checkbox" id="chkbx-1">
-					<label for="chkbx-1">Remember me</label>
-				</span>
-			</div>
-			<!-- /widget-content -->
-
-		</div>
-		<!-- /wrapper -->
-
-		<div class="clearfix"></div>
-		<div id="footer">
-		2013 &copy; Novus Admin v1.0. Powered by <a href="https://www.pixeden.com" target="_blank">Pixeden</a>
-		</div>
-
-		<script type="text/javascript" src="js/prefixfree.min.js"></script>
-		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/jquery.easytabs.min.js"></script>
-		<script type="text/javascript" src="js/excanvas.min.js"></script>
-		<script type="text/javascript" src="js/jquery.flot.js"></script>
-		<script type="text/javascript" src="js/jquery.flot.resize.js"></script>
-
-		<script type="text/javascript" src="js/main.js"></script>
-
-	</body>
+<!-- Coding by CodingNepal | www.codingnepalweb.com-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Login </title>
+    <link rel="stylesheet" href="css/student_login.css">
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+    <div class="cover">
+      <div class="front">
+        <div class="text">
+            <img src="images/UniKL_Logo.png" alt="">
+          <span class="text-2">Where the Knowledge is Applied</span>
+        </div>
+      </div>
+    </div>
+    <div class="forms">
+        <div class="form-content">
+          <div class="login-form">
+            <div class="title">Login</div>
+          <form action="#">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="text" placeholder="Enter your email" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Enter your password" required>
+              </div>
+              <div class="text"><a href="#">Forgot password?</a></div>
+              <div class="button">
+                <a href="profile.html">Submit</a>
+              </div>              
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
