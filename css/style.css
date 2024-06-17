@@ -1754,10 +1754,11 @@ i.icon-hidden { display: none; margin-top: 15px; }
     align-items: center;
     justify-content: center;
     background-color: #ff9b82;
-    margin: 50px 70px;
+    margin: 50px 60px;
     padding: 20px; /* Adjust padding as needed */
     height: 220px; /* Let it grow with content */ /* Limit width as needed */
     border-radius: 25px;
+	margin-top: -10px;
 }
 
 .courseContent {
@@ -1796,6 +1797,7 @@ i.icon-hidden { display: none; margin-top: 15px; }
 .carousel-inner .item,
 .carousel-inner img {
 	height: 500px; /* Adjust the height as needed */
+	
 }
 
 .carousel-inner img {
@@ -1814,6 +1816,11 @@ i.icon-hidden { display: none; margin-top: 15px; }
 .carousel-control .glyphicon-chevron-right {
 	color: black; /* Change the arrow color if needed */
 }
+
+#myCarousel{
+	margin-top: -500px;
+}
+
 
 
 
