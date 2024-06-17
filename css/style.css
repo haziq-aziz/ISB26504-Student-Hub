@@ -8,6 +8,7 @@
 	box-sizing: border-box;
 }
 
+
 /* overrides bootstrap & jQuery default :focus style */
 *:focus { outline: none!important; }
 
@@ -1687,6 +1688,155 @@ i.icon-hidden { display: none; margin-top: 15px; }
 
 
 }
+
+.overview {
+    background-color: #a0e5e5;
+    height: 300px;
+    width: auto;
+    text-align: center;
+    margin-right: 70px;
+    margin-left: 60px;
+    margin-top: 10px;
+    display: flex;
+    border-radius: 100px;
+}
+
+.mainOverview {
+    background-color: #8dd7d8;
+    flex-grow: 3;
+    display: flex; /* Added to enable flexbox centering */
+    flex-direction: column; /* Ensure vertical alignment of children */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    border-radius: 25px 0 0 25px;
+}
+
+.mainOverview img {
+    max-width: 70%; /* Ensure the image doesn't exceed the container's width */
+    max-height: 150px; /* Ensure the image doesn't exceed the container's height */
+    object-fit: contain; /* Fit the image inside the container without stretching */
+}
+
+.mainOverview p {
+    margin-top: 10px;
+    font-weight: bolder;
+    color: rgb(247, 247, 247);
+}
+
+.progOverview {
+    flex-grow: 1;
+    background-color: #ebebeb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    padding: 20px; /* Add padding around the content */
+    border-radius: 0 25px 25px 0;
+}
+
+.progOverview img {
+    width: 50%; /* Set the image width to 50% of the container's width */
+    max-width: 200px; /* Set a maximum width for the image */
+    object-fit: contain; /* Fit the image inside the container without stretching */
+}
+
+.progOverview p {
+    margin-top: 10px;
+    justify-content: center;
+    font-weight: bolder;
+}
+
+
+.recentCourse {
+    display: flex;
+	flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff9b82;
+    margin: 50px 60px;
+    padding: 20px; /* Adjust padding as needed */
+    height: 220px; /* Let it grow with content */ /* Limit width as needed */
+    border-radius: 25px;
+	margin-top: -10px;
+}
+
+.courseContent {
+    text-align: center;
+    margin-top: 20px;
+	
+}
+
+.courseContent p {
+    font-weight: bold;
+    color: rgb(177, 101, 9);
+    margin: 0;
+	margin-top: 50px;
+}
+
+.imageContainer {
+    text-align: center;
+    margin-top: 0px;
+}
+
+.imageContainer img {
+    max-width: 40%;
+}
+
+.textBelowImage {
+    text-align: center;
+    margin-bottom: 70px;
+	font-weight: bold;
+}
+
+.textBelowImage p {
+    margin: 0;
+}
+
+.carousel-inner,
+.carousel-inner .item,
+.carousel-inner img {
+	height: 500px; /* Adjust the height as needed */
+	
+}
+
+.carousel-inner img {
+	object-fit: cover; /* Ensure the image covers the container */
+	width: 100%; /* Ensure the image spans the width of the container */
+}
+
+.carousel-control.left,
+.carousel-control.right {
+	background-image: none; /* Remove the default background image */
+	background-color: transparent; /* Make the background transparent */
+	box-shadow: none; /* Remove any box shadow */
+}
+
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+	color: black; /* Change the arrow color if needed */
+}
+
+#myCarousel{
+	margin-top: -500px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
