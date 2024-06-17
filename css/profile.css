@@ -1,0 +1,111 @@
+/* Existing styles */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    margin: 20px auto;
+}
+
+.profile-sections {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(33% - 20px);
+    box-sizing: border-box;
+}
+
+.student-info, .advisor, .contact-info {
+    flex: 1 1 100%;
+}
+
+.student-info .image-placeholder img,
+.advisor-info .image-placeholder img {
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+.image-placeholder.large {
+    width: 150px;
+    height: 150px;
+}
+
+/*---------------- advisor style -----------------*/
+.advisor h2{
+    margin-left: 30px;
+    font-weight: bold;
+}
+.advisor-info {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.details-advisor {
+    flex: 1 1 auto;
+    margin-left: 70px;
+}
+
+.details-advisor p {
+    margin: 8px 0;
+    font-size: 18px;
+}
+
+/*---------------- student style -----------------*/
+.student-info {
+    display: flex;
+    align-items: flex-start;
+}
+
+.student-info .image-and-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.details-student {
+    flex: 1 1 auto;
+    margin-top: 25px;
+    margin-left: 50px;
+}
+
+.details-student p {
+    margin: 8px 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/*---------------- contact info style -----------------*/
+.contact-info h2{
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/*---------------- button style -----------------*/
+.btn-primary, .btn-outline-primary {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+}
