@@ -8,9 +8,9 @@ if (!isset($_SESSION['studentid'])) {
 require_once '../db_connection.php';
 
 // Retrieve student information from the database
-$studentid = $_SESSION['studentid'];
+$student_id = $_SESSION['studentid'];
 $stmt = $conn->prepare("SELECT fullname, phone, email, programme FROM student WHERE studentid = ?");
-$stmt->bind_param("i", $studentid);
+$stmt->bind_param("i", $student_id);
 $stmt->execute();
 $stmt->bind_result($fullname, $phone, $email, $programme);
 $stmt->fetch();
@@ -63,8 +63,24 @@ $stmt->close();
             </div>
         </div>
         <!-- /topBar -->
-    </div>
-    <!-- /top -->
+        <div id="profile">
+					<div class="wrapper20">
+						<div class="userInfo">
+							<div class="userImg">
+                            <img src="images/user/<?php echo htmlspecialchars($student_id); ?>.jpg" rel="user">
+							</div>
+							<div class="userTxt">
+                            <span class="fullname"><?php echo htmlspecialchars($fullname); ?></span>
+								<i class="fa fa-chevron-right"></i><br>
+								<span class="username"><?php echo htmlspecialchars($student_id); ?></span>
+							</div>
+						</div>
+						<!-- /userInfo -->
+					</div>
+				</div>
+				<!-- /profile -->
+			</div>
+			<!-- /top -->
 
     <div id="sidebar">
         <ul class="mainNav">
