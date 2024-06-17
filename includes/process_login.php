@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['student_email'] = $email;
         $_SESSION['student_fullname'] = $fullname;
 
-        header("Location: ../profile.php");
+        header("Location: ../index.php");
         exit();
     } else {
         header("Location: ../login.php?error=1");

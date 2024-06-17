@@ -99,11 +99,11 @@ $stmt_courses->close();
 					<li>
 						<a href="mycourse.php">
 							<i class="fa fa-book"></i><br>My Course</a>
-						<span class="badge badge-book">4</span>
 					</li>
 					<li>
 						<a href="meeting.php">
 							<i class="fa fa-calendar"></i><br>Meeting</a>
+							<span class="badge badge-mNav">4</span>
 					</li>
 					<li>
                 <a href="ghocs.php">

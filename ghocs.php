@@ -55,7 +55,7 @@
 						<div class="topNav clearfix">
 							<ul class="tNav clearfix">
 								<li>
-									<a href="login.html">
+									<a href="logout.php">
 										<i class="fa fa-sign-out icon-white"></i>
 									</a>
 								</li>
@@ -88,7 +88,7 @@
 			<div id="sidebar">
 				<ul class="mainNav">
 					<li>
-						<a href="index.php">
+						<a href="dashboard.php">
 							<i class="fa fa-home"></i><br>Dashboard</a>
 					</li>
 					<li>
@@ -277,9 +277,7 @@
 		<!-- /wrapper -->
 
 		<div class="clearfix"></div>
-		<div id="footer">
-		UniKL 2024 &copy; Made by Haziq Aziz
-		</div>
+		<?php include 'includes/footer.html';?>
 
 		<script type="text/javascript" src="js/prefixfree.min.js"></script>
 		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
