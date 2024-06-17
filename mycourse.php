@@ -125,7 +125,7 @@ $stmt_courses->close();
     <div id="sidebar">
         <ul class="mainNav">
             <li>
-                <a href="index.html">
+                <a href="index.php">
                     <i class="fa fa-home"></i><br>Dashboard</a>
             </li>
             <li>
@@ -133,11 +133,11 @@ $stmt_courses->close();
                     <i class="fa fa-user"></i><br>My Profile</a>
             </li>
             <li class="active">
-                <a href="mycourse.html">
+                <a href="#">
                     <i class="fa fa-book"></i><br>My Course</a>
             </li>
             <li>
-                <a href="Meeting.html">
+                <a href="Meeting.php">
                     <i class="fa fa-calendar"></i><br>Meetings</a>
                 <span class="badge badge-mNav">4</span>
             </li>
