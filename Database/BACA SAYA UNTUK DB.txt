@@ -1,0 +1,27 @@
+Letak file:
+    db_connectionn.php
+
+
+Kalau project korang dalam:
+1. htdocs/uniklhub:
+-> Letak db_connectionn.php dalam file /htdocs
+    Contoh: htdocs/db_connectionn.php
+
+2. htdocs/project/uniklhub:
+-> Letak db_connectionn.php dalam file /htdocs/project
+    Contoh: htdocs/project/db_connectionn.php
+
+Edit db_connection ikut korang punya MySQL configuration.
+Password mysql aku blank so password aku ''.
+
+Run query studenthub.sql dalam MySQL
+
+Selamat mencuba 😘
+
+User Account:
+
+Email: haziq.aziz19@s.unikl.edu.my
+Password: 123
+
+Email: hannan.hakimi@s.unikl.edu.my
+password: 123
