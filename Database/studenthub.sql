@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 18/06/2024 16:22:28
+ Date: 18/06/2024 21:02:31
 */
 
 SET NAMES utf8mb4;
@@ -39,6 +39,7 @@ CREATE TABLE `club_student`  (
 -- ----------------------------
 INSERT INTO `club_student` VALUES (5, '52213122387', 3, 'Member', '2024-06-18');
 INSERT INTO `club_student` VALUES (6, '52213122387', 4, 'Member', '2024-06-18');
+INSERT INTO `club_student` VALUES (9, '52215122117', 1, 'Member', '2024-06-18');
 
 -- ----------------------------
 -- Table structure for clubs
@@ -56,7 +57,7 @@ CREATE TABLE `clubs`  (
 -- ----------------------------
 INSERT INTO `clubs` VALUES (1, 'Software Engineering & Programming Club', 'Dive into the dynamic world of coding and innovation with UniKL MIIT\'s Software Engineering & Programming Club! We are a vibrant community of tech enthusiasts, coders, and future software engineers dedicated to pushing the boundaries of technology. Whether you\'re a seasoned programmer or just starting, our club offers a platform to enhance your skills, collaborate on exciting projects, and connect with industry experts. Join us to explore cutting-edge technologies, participate in hackathons, and turn your ideas into reality. Elevate your university experience and shape the future of tech with us!');
 INSERT INTO `clubs` VALUES (2, 'UniKL MIIT\'s Futsal (Male) Club', 'Join the UniKL MIIT Futsal (Male) Club and immerse yourself in the thrill of the game! Our club is dedicated to fostering sportsmanship, teamwork, and athleticism among students. Whether you\'re a seasoned player or just starting out, our inclusive environment welcomes all skill levels. Expect exhilarating matches, rigorous training sessions, and opportunities to compete in intervarsity tournaments. Beyond the field, we prioritize camaraderie and personal growth, creating lasting friendships and unforgettable experiences. Discover your potential with UniKL MIIT\'s Futsal (Male) Club and become part of our winning team today!');
-INSERT INTO `clubs` VALUES (3, 'Developer Studenet Clubs by Google Developers', 'Developer Student Clubs (DSC) UniKL by Google Developers are developers and leaders community group supported by Google via the Google Developers. It is the first step and part of the developers\' ecosystem, bridging the gap between theoretical knowledge and real-world application.');
+INSERT INTO `clubs` VALUES (3, 'Developer Student Clubs by Google Developers', 'Developer Student Clubs (DSC) UniKL by Google Developers are developers and leaders community group supported by Google via the Google Developers. It is the first step and part of the developers\' ecosystem, bridging the gap between theoretical knowledge and real-world application.');
 INSERT INTO `clubs` VALUES (4, 'Sekretariat Rukun Negara Club', 'The Sekretariat Rukun Negara (SRN) is one of the co-curricular activities carried out in Higher Education Institutions. In line with its name, most of the activities carried out through this secretariat aim to instill and promote the values and principles outlined in the Rukun Negara, Malaysia\'s national philosophy. These activities include community service projects, cultural events, educational seminars, and discussions on national unity and patriotism. By participating in SRN, students not only enhance their understanding of the Rukun Negara but also develop a sense of civic responsibility, leadership skills, and a deeper appreciation for Malaysia\'s diverse cultural heritage.');
 
 -- ----------------------------
@@ -68,22 +69,24 @@ CREATE TABLE `course`  (
   `course_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `course_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `credit_hour` int NOT NULL,
+  `announcement_head` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `announcement_body` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 'ISB26504', 'Software Design and Integration', 4);
-INSERT INTO `course` VALUES (2, 'ISB26603', 'Mobile and Ubiquitous Computing', 3);
-INSERT INTO `course` VALUES (3, 'ISB42603', 'Web Application Development', 3);
-INSERT INTO `course` VALUES (4, 'ISB46803', 'Advanced Programming', 3);
-INSERT INTO `course` VALUES (5, 'MPU3242', 'Innovation Management', 2);
-INSERT INTO `course` VALUES (6, 'WKD10101', 'Korean Language 1', 1);
-INSERT INTO `course` VALUES (7, 'IDB30303', 'IT Project Management', 3);
-INSERT INTO `course` VALUES (8, 'IKB21103', 'Operating System Security', 3);
-INSERT INTO `course` VALUES (9, 'IKB21204', 'Secure Software Development', 4);
-INSERT INTO `course` VALUES (10, 'INB23304', 'Network Security', 4);
+INSERT INTO `course` VALUES (1, 'ISB26504', 'Software Design and Integration', 4, 'Dear all, this week will be your pesentation week.', 'Assalamualaikum and Greeting, welcome to Semester  March  2024. Please join the class\' Team code: 68cnuu1 WhatsApp group: https://chat.whatsapp.com/H3SK1thV1Z74iPyDTxsmbb');
+INSERT INTO `course` VALUES (2, 'ISB26603', 'Mobile and Ubiquitous Computing', 3, 'Dear students MOBILE UBIQUITOUS COMPUTING. Kindly be informed that your Final Test will be conducted during your lab session in Week 14 (18/6 - 20/6).', 'You MUST  come to the lab to do the Final Test using the desktop computer in the lab. The penalty of 50% of your total marks if you do not have a valid reason to attempt outside the lab.   Handphone or any electronic device must be off during the final test session.');
+INSERT INTO `course` VALUES (3, 'ISB42603', 'Web Application Development', 3, 'I have released all your coursework marks in ECITIE. Please check. Inform me (whatsapp) if you think there is any data entry mistake.', 'Final test tip - You will be required to create a database table with an identity column. Make sure you know how to create the table and how to insert data into such table. Everything is in the lab exercise and lecture video.');
+INSERT INTO `course` VALUES (4, 'ISB46803', 'Advanced Programming', 3, 'Final Test (40%) - Week 13: 14/6/2024 (Fri), 3:00 - 6:00 pm, Venue: Lab 2107', 'For students who cannot attend the Final Test on Friday because you have another class to attend at 4:30 pm, you must take the final test on Saturday, 8:30 - 11:30 am. You must inform me latest by Wednesday.');
+INSERT INTO `course` VALUES (5, 'MPU3242', 'Innovation Management', 2, NULL, NULL);
+INSERT INTO `course` VALUES (6, 'WKD10101', 'Korean Language 1', 1, NULL, NULL);
+INSERT INTO `course` VALUES (7, 'IDB30303', 'IT Project Management', 3, NULL, NULL);
+INSERT INTO `course` VALUES (8, 'IKB21103', 'Operating System Security', 3, NULL, NULL);
+INSERT INTO `course` VALUES (9, 'IKB21204', 'Secure Software Development', 4, NULL, NULL);
+INSERT INTO `course` VALUES (10, 'INB23304', 'Network Security', 4, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for student
@@ -106,9 +109,9 @@ CREATE TABLE `student`  (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
+INSERT INTO `student` VALUES ('52213122100', 'ammar.ruslan26@s.unikl.edu.my', 'Ammar Khair Bin Ruslan', '019-6658252', 'Bachelor', 'Bachelor of Information Technology (Hons) In Software Engineering', 'Malaysian Institute of Information Technology', '4', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
 INSERT INTO `student` VALUES ('52213122387', 'haziq.aziz19@s.unikl.edu.my', 'Ahmad Haziq Bin Abdul Aziz', '019-4110974', 'Bachelor', 'Bachelor of Information Technology (Hons) In Software Engineering', 'Malaysian Institute of Information Technology', '4', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
 INSERT INTO `student` VALUES ('52215122117', 'hannan.hakimi@s.unikl.edu.my', 'Hannan Hakimi Bin Mazeri', '017-9200611', 'Bachelor', 'Bachelor of Information Technology (Hons) In Computer System Security', 'Malaysian Institute of Information Technology', '4', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
-INSERT INTO `student` VALUES ('52213122100', 'ammar.ruslan26@s.unikl.edu.my', 'Ammar Khair Bin Ruslan', '019-6658252', 'Bachelor', 'Bachelor of Information Technology (Hons) In Software Engineering', 'Malaysian Institute of Information Technology', '4', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
 
 -- ----------------------------
 -- Table structure for student_course
