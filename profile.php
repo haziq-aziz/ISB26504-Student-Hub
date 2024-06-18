@@ -153,7 +153,9 @@ $stmt->close();
                         <p>Mobile No: 012-33557784</p>
                         <p>Address: No.4, LORONG TAMAN AMAN, 25150 KUANTAN, PAHANG</p>
                     </div>
-                    <button class="btn btn-primary">More...</button>
+                    <div class="button">
+                        <a href="more.html">More ...</a>
+                    </div> 
                 </div>
             </div>
         </div>
