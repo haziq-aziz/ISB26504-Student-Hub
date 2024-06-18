@@ -1,3 +1,32 @@
+<?php
+session_start();
+if (!isset($_SESSION['studentid'])) {
+    header("Location: login.php");
+    exit();
+}
+
+require_once '../db_connection.php';
+
+// Example studentid (replace with actual logic to get studentid dynamically)
+$studentid = $_SESSION['studentid'];
+
+// Fetch student information (full name and student ID)
+$sql_student = "SELECT fullname, studentid FROM student WHERE studentid = '$studentid'";
+$result_student = $conn->query($sql_student);
+
+if ($result_student->num_rows > 0) {
+    $student = $result_student->fetch_assoc();
+    $fullname = $student['fullname'];
+    $studentid_display = $student['studentid'];
+} else {
+    // Handle case where student information is not found
+    $fullname = "Student Name"; // Default value if not found
+    $studentid_display = "@studentid"; // Default value if not found
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,14 +109,14 @@
         <div id="top">
             <div id="topBar">
                 <div class="wrapper20">
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="dashboard.php">
 						<i class="fa fa-chevron-left"></i>
                         <img src="images/logo.png" rel="logo">
                     </a>
                     <div class="topNav clearfix">
                         <ul class="tNav clearfix">
                             <li>
-                                <a href="login.html">
+                                <a href="logout.php">
                                     <i class="fa fa-sign-out icon-white"></i>
                                 </a>
                             </li>
@@ -100,12 +129,12 @@
 			<div class="wrapper20">
 				<div class="userInfo">
 					<div class="userImg">
-						<img src="images/user.jpg" rel="user">
-					</div>
-					<div class="userTxt">
-						<span class="fullname">Michael Williams</span>
-						<br>
-						<span class="username">@mwilliams</span>
+                    <img src="images/user/<?php echo htmlspecialchars($studentid); ?>.jpg" rel="user">
+                    </div>
+                    <div class="userTxt">
+                        <span class="fullname"><?php echo htmlspecialchars($fullname); ?></span>
+                        <i class="fa fa-chevron-right"></i><br>
+                        <span class="username"><?php echo htmlspecialchars($studentid); ?></span>
 					</div>
 				</div>
 				<i class="fa fa-bars icon-nav-mobile"></i>
@@ -115,7 +144,7 @@
         <div id="mains" class="clearfix">
             <div class="secInfo">
                 <h1 class="secTitle">ISB26504  - SOFTWARE DESIGN AND INTEGRATION</h1>
-                <span class="secExtra">Dashboard > My Course > Subject Name</span>
+                <span class="secExtra"><a href="dashboard.php">Dashboard</a> > Subject Name</span>
             </div>
 
             <div class="fluid">
