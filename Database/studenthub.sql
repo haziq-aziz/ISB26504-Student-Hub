@@ -108,6 +108,7 @@ CREATE TABLE `student`  (
 -- ----------------------------
 INSERT INTO `student` VALUES ('52213122387', 'haziq.aziz19@s.unikl.edu.my', 'Ahmad Haziq Bin Abdul Aziz', '019-4110974', 'Bachelor', 'Bachelor of Information Technology (Hons) In Software Engineering', 'Malaysian Institute of Information Technology', '4', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
 INSERT INTO `student` VALUES ('52215122117', 'hannan.hakimi@s.unikl.edu.my', 'Hannan Hakimi Bin Mazeri', '017-9200611', 'Bachelor', 'Bachelor of Information Technology (Hons) In Computer System Security', 'Malaysian Institute of Information Technology', '4', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
+INSERT INTO `student` VALUES ('52213122100', 'ammar.ruslan26@s.unikl.edu.my', 'Ammar Khair Bin Ruslan', '019-6658252', 'Bachelor', 'Bachelor of Information Technology (Hons) In Software Engineering', 'Malaysian Institute of Information Technology', '4', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
 
 -- ----------------------------
 -- Table structure for student_course
