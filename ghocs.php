@@ -93,35 +93,7 @@ $conn->close();
     </style>
 
 </head>
-<body>
-<div id="loading">
-    <div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-<div id="wrapper" class="container">
-
-    <div id="top">
-        <div id="topBar">
-            <div class="wrapper20">
-                <a class="logo" href="index.html">
-                    <img src="images/logo.png" rel="logo">
-                </a>
-                <div class="topNav clearfix">
-                    <ul class="tNav clearfix">
-                        <li>
-                            <a href="logout.php">
-                                <i class="fa fa-sign-out icon-white"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /topNav -->
-            </div>
-        </div>
-        <!-- /topBar -->
+<?php include 'includes/header.html';?>
 
         <div id="profile">
 					<div class="wrapper20">
@@ -161,7 +133,7 @@ $conn->close();
             </li>
             <li>
                 <a href="Meeting.php">
-                    <i class="fa fa-calendar"></i><br>Meetings</a>
+                    <i class="fa fa-calendar"></i><br>Timetable</a>
                 <span class="badge badge-mNav">4</span>
             </li>
             <li class="active">

@@ -72,34 +72,7 @@ $conn->close();
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
-<body>
-<div id="loading">
-    <div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-<div id="wrapper" class="container">
-    <div id="top">
-        <div id="topBar">
-            <div class="wrapper20">
-                <a class="logo" href="../index.html">
-                    <img src="../images/logo.png" rel="logo">
-                </a>
-                <div class="topNav clearfix">
-                    <ul class="tNav clearfix">
-                        <li>
-                            <a href="../logout.php">
-                                <i class="fa fa-sign-out icon-white"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /topNav -->
-            </div>
-        </div>
-        <!-- /topBar -->
+<?php include 'includes/header.html';?>
 
         <div id="profile">
             <div class="wrapper20">
@@ -138,7 +111,7 @@ $conn->close();
             </li>
             <li>
                 <a href="meeting.php">
-                    <i class="fa fa-calendar"></i><br>Meetings</a>
+                    <i class="fa fa-calendar"></i><br>Timetable</a>
                 <span class="badge badge-mNav">4</span>
             </li>
             <li>
@@ -186,9 +159,9 @@ $conn->close();
                     <?php endif; ?>
                     <?php foreach ($courses as $course): ?>
                         <div class="card mb-3">
-                            <img class="card-img-top" src="images/subject/<?php echo htmlspecialchars($course['course_code']); ?>.png" alt="Card image cap">
+                            <a href="viewsubject.php"><img class="card-img-top" src="images/subject/<?php echo htmlspecialchars($course['course_code']); ?>.png" alt="Card image cap"></a>
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo htmlspecialchars($course['course_code']) . ' - ' . htmlspecialchars($course['course_name']); ?></h5>
+                            <a href="viewsubject.php"><h5 class="card-title"><?php echo htmlspecialchars($course['course_code']) . ' - ' . htmlspecialchars($course['course_name']); ?></h5></a>
                                 <p>
                                     <div class="progress progress-striped active">
                                         <div class="progress-bar bar-aqua" style="width: <?php echo htmlspecialchars($course['progress']); ?>%;"></div>
