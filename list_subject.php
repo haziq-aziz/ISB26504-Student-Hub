@@ -57,8 +57,20 @@
             margin-left: 10px;
         }
 
-		
+        .progress {
+            height: 25px;
+            background-color: #e0e0e0;
+            border-radius: 12.5px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
 
+        .progress-bar {
+            height: 100%;
+            background-color: #4caf50;
+            width: 0;
+            pad
+        }
     </style>
 	
 </head>
@@ -145,16 +157,16 @@
                         <div class="progress-section">
                             <ul class="progress-list">
                                 <li>
-                                    <span class="icon"></span> Assignment 1 <input type="checkbox">
+                                    <span class="icon"></span> Assignment 1 <input type="checkbox" class="progress-checkbox">
                                 </li>
                                 <li>
-                                    <span class="icon"></span> Test 1 <input type="checkbox">
+                                    <span class="icon"></span> Test 1 <input type="checkbox" class="progress-checkbox">
                                 </li>
                                 <li>
-                                    <span class="icon"></span> Test 2 <input type="checkbox">
+                                    <span class="icon"></span> Test 2 <input type="checkbox" class="progress-checkbox">
                                 </li>
                                 <li>
-                                    <span class="icon"></span> Test 3 <input type="checkbox">
+                                    <span class="icon"></span> Test 3 <input type="checkbox" class="progress-checkbox">
                                 </li>
                             </ul>
   
@@ -170,16 +182,16 @@
                         <div class="progress-section">
                             <ul class="progress-list">
                                 <li>
-                                    <span class="icon"></span> Assignment 1 <input type="checkbox">
+                                    <span class="icon"></span> Assignment 1 <input type="checkbox" class="progress-checkbox">
                                 </li>
                                 <li>
-                                    <span class="icon"></span> Test 1 <input type="checkbox">
+                                    <span class="icon"></span> Test 1 <input type="checkbox" class="progress-checkbox">
                                 </li>
                                 <li>
-                                    <span class="icon"></span> Test 2 <input type="checkbox">
+                                    <span class="icon"></span> Test 2 <input type="checkbox" class="progress-checkbox">
                                 </li>
                                 <li>
-                                    <span class="icon"></span> Test 3 <input type="checkbox">
+                                    <span class="icon"></span> Test 3 <input type="checkbox" class="progress-checkbox">
                                 </li>
                             </ul>
 
@@ -195,16 +207,16 @@
                         <div class="progress-section">
                             <ul class="progress-list">
                                 <li>
-                                    <span class="icon"></span> Assignment 1 <input type="checkbox">
+                                    <span class="icon"></span> Assignment 1 <input type="checkbox" class="progress-checkbox">
                                 </li>
                                 <li>
-                                    <span class="icon"></span> Test 1 <input type="checkbox">
+                                    <span class="icon"></span> Test 1 <input type="checkbox" class="progress-checkbox">
                                 </li>
                                 <li>
-                                    <span class="icon"></span> Test 2 <input type="checkbox">
+                                    <span class="icon"></span> Test 2 <input type="checkbox" class="progress-checkbox">
                                 </li>
                                 <li>
-                                    <span class="icon"></span> Test 3 <input type="checkbox">
+                                    <span class="icon"></span> Test 3 <input type="checkbox" class="progress-checkbox">
                                 </li>
                             </ul>
  
@@ -219,7 +231,9 @@
                     <div class="widget-content pad20f">
                         <p>Progress Topic</p>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">40%</div>
+                            <div class="progress-bar" id="progress-bar">
+                                <span id="progress-text">0%</span> <!-- Percentage display inside the progress bar -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -242,5 +256,46 @@
     <script type="text/javascript" src="js/jquery.flot.js"></script>
     <script type="text/javascript" src="js/jquery.flot.resize.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Function to update progress bar
+            // Function to update progress bar and percentage display
+            // Function to update progress bar and percentage display
+            function updateProgressBar() {
+                var totalBoxes = $('.progress-checkbox').length;
+                var checkedBoxes = $('.progress-checkbox:checked').length;
+                var percentage = (checkedBoxes / totalBoxes) * 100;
+
+                // Round percentage to 0 decimal places
+                percentage = Math.round(percentage);
+
+                // Update progress bar width
+                var progressBar = $('#progress-bar');
+                progressBar.width(percentage + '%');
+
+                // Update progress text display and position
+                var progressText = $('#progress-text');
+                progressText.text(percentage + '%');
+
+                // Adjust position of progress text in the center of the progress bar
+                var progressBarWidth = progressBar.width();
+                var progressTextWidth = progressText.width();
+                var leftPosition = (progressBarWidth - progressTextWidth) / 2;
+                progressText.css('left', leftPosition + 'px');
+            }
+
+            // Update progress bar on checkbox change
+            $('.progress-checkbox').change(function() {
+                updateProgressBar();
+            });
+
+            // Initial call to update progress bar on page load
+            updateProgressBar();
+        });
+    </script>
+
 </body>
 </html>
+
+   

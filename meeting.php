@@ -240,7 +240,7 @@
 			<div id="sidebar">
 				<ul class="mainNav">
 					<li>
-						<a href="index.php">
+						<a href="dashboard.php">
 							<i class="fa fa-home"></i><br>Dashboard</a>
 					</li>
 					<li>
@@ -420,9 +420,7 @@
 		<!-- /wrapper -->
 
 		<div class="clearfix"></div>
-		<div id="footer">
-		2013 &copy; Novus Admin v1.0. Powered by <a href="https://www.pixeden.com" target="_blank">Pixeden</a>
-		</div>
+		<?php include 'includes/footer.html';?>
 
 		<script type="text/javascript" src="js/prefixfree.min.js"></script>
 		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>

@@ -8,9 +8,9 @@ if (!isset($_SESSION['studentid'])) {
 require_once '../db_connection.php';
 
 // Retrieve student information from the database
-$student_id = $_SESSION['studentid'];
+$studentid = $_SESSION['studentid'];
 $stmt = $conn->prepare("SELECT fullname, phone, email, programme FROM student WHERE studentid = ?");
-$stmt->bind_param("i", $student_id);
+$stmt->bind_param("i", $studentid);
 $stmt->execute();
 $stmt->bind_result($fullname, $phone, $email, $programme);
 $stmt->fetch();
@@ -67,12 +67,12 @@ $stmt->close();
 					<div class="wrapper20">
 						<div class="userInfo">
 							<div class="userImg">
-                            <img src="images/user/<?php echo htmlspecialchars($student_id); ?>.jpg" rel="user">
+                            <img src="images/user/<?php echo htmlspecialchars($studentid); ?>.jpg" rel="user">
 							</div>
 							<div class="userTxt">
                             <span class="fullname"><?php echo htmlspecialchars($fullname); ?></span>
 								<i class="fa fa-chevron-right"></i><br>
-								<span class="username"><?php echo htmlspecialchars($student_id); ?></span>
+								<span class="username"><?php echo htmlspecialchars($studentid); ?></span>
 							</div>
 						</div>
 						<!-- /userInfo -->
@@ -85,24 +85,24 @@ $stmt->close();
     <div id="sidebar">
         <ul class="mainNav">
             <li>
-                <a href="index.html">
+                <a href="dashboard.php">
                     <i class="fa fa-home"></i><br>Dashboard</a>
             </li>
             <li class="active">
-                <a href="profile.html">
+                <a href="#">
                     <i class="fa fa-user"></i><br>My Profile</a>
             </li>
             <li>
-                <a href="mycourse.html">
+                <a href="mycourse.php">
                     <i class="fa fa-book"></i><br>My Course</a>
             </li>
             <li>
-                <a href="meeting.html">
+                <a href="meeting.php">
                     <i class="fa fa-calendar"></i><br>Meetings</a>
                 <span class="badge badge-mNav">4</span>
             </li>
             <li>
-                <a href="ghocs.html">
+                <a href="ghocs.php">
                     <i class="fa fa-trophy"></i><br>GHOCs</a>
             </li>
         </ul>
@@ -163,11 +163,8 @@ $stmt->close();
     </div>
     <!-- /wrapper -->
 
-    <div id="footer">
-        <div class="wrapper20">
-            <span>&copy; Copyright 2024. All rights reserved.</span>
-        </div>
-    </div>
+    <div class="clearfix"></div>
+    <?php include 'includes/footer.html';?>
     <!-- /footer -->
 
     <!-- Bootstrap core JavaScript -->

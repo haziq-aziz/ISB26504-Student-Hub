@@ -125,7 +125,7 @@ $stmt_courses->close();
     <div id="sidebar">
         <ul class="mainNav">
             <li>
-                <a href="index.php">
+                <a href="dashboard.php">
                     <i class="fa fa-home"></i><br>Dashboard</a>
             </li>
             <li>
@@ -142,7 +142,7 @@ $stmt_courses->close();
                 <span class="badge badge-mNav">4</span>
             </li>
             <li>
-                <a href="ghocs.html">
+                <a href="ghocs.php">
                     <i class="fa fa-trophy"></i><br>GHOCs</a>
             </li>
         </ul>
