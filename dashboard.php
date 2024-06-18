@@ -7,17 +7,16 @@ if (!isset($_SESSION['studentid'])) {
 
 require_once '../db_connection.php';
 
-// Example studentid (replace with actual logic to get studentid dynamically)
 $studentid = $_SESSION['studentid'];
 
-// Fetch student information (full name and student ID)
+// Fetch student information
 $sql_student = "SELECT fullname, studentid FROM student WHERE studentid = '$studentid'";
 $result_student = $conn->query($sql_student);
 
 if ($result_student->num_rows > 0) {
     $student = $result_student->fetch_assoc();
-    $fullname = $student['fullname'];
-    $studentid_display = $student['studentid'];
+    $fullname = $student['fullname'] ?? 'Student Name';
+    $studentid_display = $student['studentid'] ?? '@studentid';
 } else {
     // Handle case where student information is not found
     $fullname = "Student Name"; // Default value if not found
@@ -29,7 +28,7 @@ $courses = array();
 
 try {
     // Fetch courses enrolled by the student, including progress
-    $sql_courses = "SELECT c.course_code, c.course_name, sc.progress
+    $sql_courses = "SELECT c.course_code, c.course_name, sc.progress, c.id as course_id
                     FROM course c
                     JOIN student_course sc ON c.id = sc.course_id
                     WHERE sc.studentid = '$studentid'";
@@ -74,111 +73,115 @@ $conn->close();
 </head>
 <?php include 'includes/header.html';?>
 
-        <div id="profile">
-            <div class="wrapper20">
-                <div class="userInfo">
-                    <div class="userImg">
-                        <img src="images/user/<?php echo htmlspecialchars($studentid); ?>.jpg" rel="user">
-                    </div>
-                    <div class="userTxt">
-                        <span class="fullname"><?php echo htmlspecialchars($fullname); ?></span>
-                        <i class="fa fa-chevron-right"></i><br>
-                        <span class="username"><?php echo htmlspecialchars($studentid); ?></span>
-                    </div>
-                </div>
-                <!-- /userInfo -->
-
-                <i class="fa fa-bars icon-nav-mobile"></i>
+<div id="profile">
+    <div class="wrapper20">
+        <div class="userInfo">
+            <div class="userImg">
+                <img src="images/user/<?php echo htmlspecialchars($studentid ?? 'default'); ?>.jpg" rel="user">
+            </div>
+            <div class="userTxt">
+                <span class="fullname"><?php echo htmlspecialchars($fullname ?? 'Student Name'); ?></span>
+                <i class="fa fa-chevron-right"></i><br>
+                <span class="username"><?php echo htmlspecialchars($studentid_display ?? '@studentid'); ?></span>
             </div>
         </div>
-        <!-- /profile -->
-    </div>
-    <!-- /top -->
+        <!-- /userInfo -->
 
-    <div id="sidebar">
-        <ul class="mainNav">
-            <li class="active">
-                <a href="#">
-                    <i class="fa fa-home"></i><br>Dashboard</a>
-            </li>
-            <li>
-                <a href="profile.php">
-                    <i class="fa fa-user"></i><br>My Profile</a>
-            </li>
-            <li>
-                <a href="mycourse.php">
-                    <i class="fa fa-book"></i><br>My Course</a>
-            </li>
-            <li>
-                <a href="meeting.php">
-                    <i class="fa fa-calendar"></i><br>Timetable</a>
+        <i class="fa fa-bars icon-nav-mobile"></i>
+    </div>
+</div>
+<!-- /profile -->
+</div>
+<!-- /top -->
+
+<div id="sidebar">
+    <ul class="mainNav">
+        <li class="active">
+            <a href="#">
+                <i class="fa fa-home"></i><br>Dashboard</a>
+        </li>
+        <li>
+            <a href="profile.php">
+                <i class="fa fa-user"></i><br>My Profile</a>
+        </li>
+        <li>
+            <a href="mycourse.php">
+                <i class="fa fa-book"></i><br>My Course</a>
+        </li>
+        <li>
+            <a href="meeting.php">
+                <i class="fa fa-calendar"></i><br>Timetable</a>
                 <span class="badge badge-mNav">4</span>
-            </li>
-            <li>
-                <a href="ghocs.php">
-                    <i class="fa fa-trophy"></i><br>GHOCS</a>
-            </li>
-        </ul>
+        </li>
+        <li>
+            <a href="ghocs.php">
+                <i class="fa fa-trophy"></i><br>GHOCS</a>
+        </li>
+    </ul>
+</div>
+<!-- /sidebar -->
+
+<div id="main" class="clearfix">
+    <div class="secInfo">
+        <h1 class="secTitle">Dashboard</h1>
+        <span class="secExtra">Course Overview</span>
     </div>
-    <!-- /sidebar -->
+    <!-- /SecInfo -->
 
-    <div id="main" class="clearfix">
-        <div class="secInfo">
-            <h1 class="secTitle">Dashboard</h1>
-            <span class="secExtra">Course Overview</span>
-        </div>
-        <!-- /SecInfo -->
-
-        <div class="fluid">
-            <div class="widget leftcontent grid12">
-                <div class="widget-content pad20f">
-                    <?php if (isset($_SESSION['error_messages'])): ?>
-                        <div class="alert alert-danger">
-                            <strong>Uh Oh!</strong> <?php echo htmlspecialchars($_SESSION['error_messages']); ?>
-                        </div>
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-                    <?php endif; ?>
-                    <?php foreach ($courses as $course): ?>
-                        <div class="card mb-3">
-                            <a href="viewsubject.php"><img class="card-img-top" src="images/subject/<?php echo htmlspecialchars($course['course_code']); ?>.png" alt="Card image cap"></a>
-                            <div class="card-body">
-                            <a href="viewsubject.php"><h5 class="card-title"><?php echo htmlspecialchars($course['course_code']) . ' - ' . htmlspecialchars($course['course_name']); ?></h5></a>
-                                <p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar bar-aqua" style="width: <?php echo htmlspecialchars($course['progress']); ?>%;"></div>
-                                    </div>
-                                </p>
-                                <p class="card-text">4% complete </p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+    <div class="fluid">
+        <div class="widget leftcontent grid12">
+            <div class="widget-content pad20f">
+                <?php if (isset($_SESSION['error_messages'])): ?>
+                    <div class="alert alert-danger">
+                        <strong>Uh Oh!</strong> <?php echo htmlspecialchars($_SESSION['error_messages'] ?? ''); ?>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                <?php endif; ?>
+                <?php foreach ($courses as $course): ?>
+    <div class="card mb-3">
+        <a href="viewsubject.php?course_id=<?php echo htmlspecialchars($course['course_id']); ?>">
+            <img class="card-img-top" src="images/subject/<?php echo htmlspecialchars($course['course_code']); ?>.png" alt="Card image cap">
+        </a>
+        <div class="card-body">
+            <a href="viewsubject.php?course_id=<?php echo htmlspecialchars($course['course_id']); ?>">
+                <h5 class="card-title"><?php echo htmlspecialchars($course['course_code']) . ' - ' . htmlspecialchars($course['course_name']); ?></h5>
+            </a>
+            <p>
+                <div class="progress progress-striped active">
+                    <div class="progress-bar bar-aqua" style="width: <?php echo htmlspecialchars($course['progress']); ?>%;"></div>
                 </div>
-                <!-- /widget-content -->
-            </div>
-            <!-- /widget -->
+            </p>
+            <p class="card-text"><?php echo htmlspecialchars($course['progress']); ?>% complete</p>
         </div>
-        <!-- /fluid -->
     </div>
-    <!-- /main -->
+<?php endforeach; ?>
+            </div>
+            <!-- /widget-content -->
+        </div>
+        <!-- /widget -->
+    </div>
+    <!-- /fluid -->
+</div>
+<!-- /main -->
 </div>
 <!-- /wrapper -->
 
