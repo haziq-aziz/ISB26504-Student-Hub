@@ -7,10 +7,10 @@ if (!isset($_SESSION['studentid'])) {
 
 require_once '../db_connection.php';
 
-// Example studentid (replace with actual logic to get studentid dynamically)
+// Get the student ID from the session
 $studentid = $_SESSION['studentid'];
 
-// Fetch student information (full name and student ID)
+// Fetch student information
 $sql_student = "SELECT fullname, studentid FROM student WHERE studentid = '$studentid'";
 $result_student = $conn->query($sql_student);
 
@@ -22,6 +22,28 @@ if ($result_student->num_rows > 0) {
     // Handle case where student information is not found
     $fullname = "Student Name"; // Default value if not found
     $studentid_display = "@studentid"; // Default value if not found
+}
+
+// Fetch course information based on course_id from URL parameter
+$course_id = isset($_GET['course_id']) ? $_GET['course_id'] : 1; // Default to course ID 1 if not provided
+$sql_course = "SELECT course_code, course_name, 
+              IFNULL(announcement_head, '(no announcement)') AS announcement_head, 
+              IFNULL(announcement_body, '') AS announcement_body 
+              FROM course WHERE id = '$course_id'";
+$result_course = $conn->query($sql_course);
+
+if ($result_course->num_rows > 0) {
+    $course = $result_course->fetch_assoc();
+    $course_code = $course['course_code'];
+    $course_name = $course['course_name'];
+    $announcement_head = $course['announcement_head'];
+    $announcement_body = $course['announcement_body'];
+} else {
+    // Handle case where course information is not found
+    $course_code = "CS101"; // Default value if not found
+    $course_name = "Introduction to Computer Science"; // Default value if not found
+    $announcement_head = "(no announcement)"; // Default value if not found
+    $announcement_body = ""; // Default value if not found
 }
 
 $conn->close();
@@ -98,19 +120,16 @@ $conn->close();
             height: 100%;
             background-color: #4caf50;
             width: 0;
-            pad
         }
     </style>
-	
 </head>
 <body>
-	
     <div id="wrapper" class="container">
         <div id="top">
             <div id="topBar">
                 <div class="wrapper20">
                     <a class="logo" href="dashboard.php">
-						<i class="fa fa-chevron-left"></i>
+                        <i class="fa fa-chevron-left"></i>
                         <img src="images/logo.png" rel="logo">
                     </a>
                     <div class="topNav clearfix">
@@ -125,26 +144,25 @@ $conn->close();
                 </div>
             </div>
         </div>
-		<div id="profile">
-			<div class="wrapper20">
-				<div class="userInfo">
-					<div class="userImg">
-                    <img src="images/user/<?php echo htmlspecialchars($studentid); ?>.jpg" rel="user">
+        <div id="profile">
+            <div class="wrapper20">
+                <div class="userInfo">
+                    <div class="userImg">
+                        <img src="images/user/<?php echo htmlspecialchars($studentid); ?>.jpg" rel="user">
                     </div>
                     <div class="userTxt">
                         <span class="fullname"><?php echo htmlspecialchars($fullname); ?></span>
                         <i class="fa fa-chevron-right"></i><br>
                         <span class="username"><?php echo htmlspecialchars($studentid); ?></span>
-					</div>
-				</div>
-				<i class="fa fa-bars icon-nav-mobile"></i>
-		
-			</div>
-		</div>
+                    </div>
+                </div>
+                <i class="fa fa-bars icon-nav-mobile"></i>
+            </div>
+        </div>
         <div id="mains" class="clearfix">
             <div class="secInfo">
-                <h1 class="secTitle">ISB26504  - SOFTWARE DESIGN AND INTEGRATION</h1>
-                <span class="secExtra"><a href="dashboard.php">Dashboard</a> > Subject Name</span>
+                <h1 class="secTitle"><?php echo htmlspecialchars($course_code) . ' - ' . htmlspecialchars($course_name); ?></h1>
+                <span class="secExtra"><a href="dashboard.php">Dashboard</a> > <?php echo htmlspecialchars($course_name); ?></span>
             </div>
 
             <div class="fluid">
@@ -152,14 +170,14 @@ $conn->close();
                     <div class="widget-content pad20f">
                         <div class="row">
                             <div class="col-md-2">
-                                <img src="images/user.jpg" alt="Lecturer Photo" class="img-responsive">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Lecturer Photo" class="img-responsive">
                             </div>
                             <div class="col-md-10">
                                 <h4>Lecturer Biodata</h4>
-                                <p>Name: Ahmad Haziq</p>
-                                <p>Room: 18-07</p>
-                                <p>Email: haziq@unikl.com</p>
-                                <p>Phone No: 1234567810</p>
+                                <p>Name: Prof. Shamsul</p>
+                                <p>Room: 1603</p>
+                                <p>Email: shamsul@gmail.com</p>
+                                <p>Phone No: 01234567810</p>
                             </div>
                         </div>
                     </div>
@@ -169,10 +187,13 @@ $conn->close();
             <div class="fluid">
                 <div class="widget leftcontent grid12">
                     <div class="widget-header">
-                        <h3 class="widget-title">Announcement</h3>
+                        <h3 class="widget-title">Class Announcement</h3>
                     </div>
                     <div class="widget-content pad20f">
-                        <p>This is the Subject Detail Page</p>
+                        <div class="alert alert-info">
+                            <strong>Announcement 📢:</strong> <?php echo htmlspecialchars($announcement_head); ?>
+                        </div>
+                        <p><?php echo htmlspecialchars($announcement_body); ?></p>
                     </div>
                 </div>
             </div>
@@ -186,19 +207,22 @@ $conn->close();
                         <div class="progress-section">
                             <ul class="progress-list">
                                 <li>
-                                    <span class="icon"></span> Assignment 1 <input type="checkbox" class="progress-checkbox">
+                                    <a href="#" class="fa fa-file-text"> Chapter 01</a> <input type="checkbox" class="progress-checkbox">
                                 </li>
+                                <p>Introduction to Software Design</p>
+                                <br />
                                 <li>
-                                    <span class="icon"></span> Test 1 <input type="checkbox" class="progress-checkbox">
+                                <a href="#" class="fa fa-upload"> Lab 0 : Revision (Fundamental Programming)</a> <input type="checkbox" class="progress-checkbox">
                                 </li>
+                                <p>A student's profile should be expressed using the Java programming language as part of the application. Ensure that the student completes the exercise to the best of his or her ability. Please provide a screenshot of your output and listing code to demonstrate that you have completed the exercise.</p>
+                                <br />
+
                                 <li>
-                                    <span class="icon"></span> Test 2 <input type="checkbox" class="progress-checkbox">
+                                    <a href="#" class="fa fa-file-text"> Tutorial 1</a> <input type="checkbox" class="progress-checkbox">
                                 </li>
-                                <li>
-                                    <span class="icon"></span> Test 3 <input type="checkbox" class="progress-checkbox">
-                                </li>
+                                <p>The tutorial will be conducted in the form of a group discussion (2 or 3 participants per group). In the lab session, we will discuss this tutorial in more detail.</p>
+                                <br />
                             </ul>
-  
                         </div>
                     </div>
                 </div>
@@ -209,21 +233,28 @@ $conn->close();
                     </div>
                     <div class="widget-content pad20f">
                         <div class="progress-section">
-                            <ul class="progress-list">
+                        <ul class="progress-list">
                                 <li>
-                                    <span class="icon"></span> Assignment 1 <input type="checkbox" class="progress-checkbox">
+                                    <a href="#" class="fa fa-file-text"> First Reference -E-Book : Java ProgrammingFile</a> <input type="checkbox" class="progress-checkbox">
                                 </li>
+                                <p>
+                                Dear students,<br />
+                                You can use this book as a reference. <br />
+                                Good Luck, <br />
+                                -Puan Robiah Hamzah-
+                                </p>
+                                <br />
                                 <li>
-                                    <span class="icon"></span> Test 1 <input type="checkbox" class="progress-checkbox">
+                                <a href="#" class="fa fa-upload"> Lecture Notes Chapter 02</a> <input type="checkbox" class="progress-checkbox">
                                 </li>
-                                <li>
-                                    <span class="icon"></span> Test 2 <input type="checkbox" class="progress-checkbox">
-                                </li>
-                                <li>
-                                    <span class="icon"></span> Test 3 <input type="checkbox" class="progress-checkbox">
-                                </li>
-                            </ul>
+                                <p>Chapter 02: Towards Object Technology</p>
+                                <br />
 
+                                <li>
+                                    <a href="#" class="fa fa-file-text"> Lab Exercise Topic 2: Object Oriented Technology File</a> <input type="checkbox" class="progress-checkbox">
+                                </li>
+                                <br />
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -234,26 +265,85 @@ $conn->close();
                     </div>
                     <div class="widget-content pad20f">
                         <div class="progress-section">
-                            <ul class="progress-list">
+                        <ul class="progress-list">
                                 <li>
-                                    <span class="icon"></span> Assignment 1 <input type="checkbox" class="progress-checkbox">
+                                    <a href="#" class="fa fa-file-text"> E-Book -Requirement</a> <input type="checkbox" class="progress-checkbox">
                                 </li>
+                                <p>
+                                My dear students,<br />
+                                I have provided you with a second free e-book that you can download for your reference.<br />
+                                Good luck,<br />
+                                Madam Robiah Hamzah
+                                </p>
+                                <br />
                                 <li>
-                                    <span class="icon"></span> Test 1 <input type="checkbox" class="progress-checkbox">
+                                <a href="#" class="fa fa-upload"> Chapter 3</a> <input type="checkbox" class="progress-checkbox">
                                 </li>
+                                <p>Software Quality and Criteria of Object Orientation</p>
+                                <br />
+
                                 <li>
-                                    <span class="icon"></span> Test 2 <input type="checkbox" class="progress-checkbox">
+                                    <a href="#" class="fa fa-pencil"> March 2023 Online Quiz</a> <input type="checkbox" class="progress-checkbox">
                                 </li>
-                                <li>
-                                    <span class="icon"></span> Test 3 <input type="checkbox" class="progress-checkbox">
-                                </li>
-                            </ul>
+                                <p><b>Online QUIZ <br></b></p><p><b>Exam Instructions</b></p>
+
+<p><b>DATE: 4 APRIL&nbsp; 2024 (THURSDAY).</b></p>
+
+<p id="yui_3_17_2_1_1718714011697_199"><b id="yui_3_17_2_1_1718714011697_198">TIME: 4.00 Pm-5.30pm (20 minutes)</b></p><p><b>Topic Cover: Chapters 1 and 2<br></b></p>
+
+<p><b>Before beginning the
+test:</b></p>
+
+<ul type="disc">
+ <li>Make sure you have a good internet connection</li>
  
+ <li>Log in to UniKL VLE (Firefox recommended)</li>
+</ul>
+
+<p><b>During the test:</b></p>
+
+<ul type="disc">
+ <li>Students must complete the 30-mark questions within the&nbsp; 20 minutes time frame allotted for the test.</li>
+ <li>The QUIZ must be completed in one sitting. You can only
+     attempt it once.</li>
+ <li>Click the "Submit all and finish" button to
+     submit your test (when the time expires open attempts are submitted
+     automatically)</li>
+</ul>
+                                <br />
+                            </ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="widget leftcontent grid12">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Week 4</h3>
+                    </div>
+                    <div class="widget-content pad20f">
+                        <div class="progress-section">
+                        <ul class="progress-list">
+                                <li>
+                                    <a href="#" class="fa fa-file-text"> Lecture notes Chapter 04</a> <input type="checkbox" class="progress-checkbox">
+                                </li>
+                                <p>Chapter 04: Concept of class : design principles</p>
+                                <br />
+                                <li>
+                                <a href="#" class="fa fa-upload"> Lab chapter 04</a> <input type="checkbox" class="progress-checkbox">
+                                </li>
+                                <br />
+
+                                <li>
+                                    <a href="#" class="fa fa-file-text"> Lab activity- Chapter 4 Bonus question</a> <input type="checkbox" class="progress-checkbox">
+                                </li>
+                                <p dir="ltr" style="text-align: left;">&nbsp;your file&nbsp; :&nbsp; example: &nbsp; lab4_MuhammadAli_Abuzarif.pdf</p>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <                <div class="widget leftcontent grid12">
                     <div class="widget-header">
                         <h3 class="widget-title">Subject Progress</h3>
                     </div>
@@ -271,9 +361,7 @@ $conn->close();
     </div>
 
     <div class="clearfix"></div>
-    <div id="footer">
-        2023 &copy; Subject Information. Powered by <a href="https://www.pixeden.com" target="_blank">Pixeden</a>
-    </div>
+    <?php include 'includes/footer.html';?>
 
     <script type="text/javascript" src="js/prefixfree.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
@@ -326,5 +414,3 @@ $conn->close();
 
 </body>
 </html>
-
-   
