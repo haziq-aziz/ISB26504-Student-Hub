@@ -25,3 +25,7 @@ Password: 123
 
 Email: hannan.hakimi@s.unikl.edu.my
 password: 123
+
+Test Exception Handling Account:
+Email: ammar.ruslan26@s.unikl.edu.my
+Password: 123

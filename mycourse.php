@@ -27,15 +27,21 @@ $sql = "SELECT c.course_code, c.course_name, c.credit_hour, sc.group, sc.lab_gro
 $stmt_courses = $conn->prepare($sql);
 $stmt_courses->bind_param("s", $studentid);
 $stmt_courses->execute();
+$stmt_courses->store_result(); // Store result for num_rows check
 $stmt_courses->bind_result($course_code, $course_name, $credit_hour, $group, $lab_group);
 
 $registered_courses = [];
 $total_credit_hours = 0;
 
-// Fetching all registered courses
-while ($stmt_courses->fetch()) {
-    $registered_courses[] = [$course_code, $course_name, $credit_hour, $group, $lab_group];
-    $total_credit_hours += $credit_hour;
+// Check if there are no registered courses
+if ($stmt_courses->num_rows === 0) {
+    $error_message = "You have not registered for any courses yet.";
+} else {
+    // Fetching all registered courses
+    while ($stmt_courses->fetch()) {
+        $registered_courses[] = [$course_code, $course_name, $credit_hour, $group, $lab_group];
+        $total_credit_hours += $credit_hour;
+    }
 }
 
 $stmt_courses->close();
@@ -103,91 +109,97 @@ $stmt_courses->close();
 <body>
 <?php include 'includes/header.html';?>
 
-        <div id="profile">
-            <div class="wrapper20">
-                <div class="userInfo">
-                    <div class="userImg">
-                        <img src="images/user/<?php echo htmlspecialchars($student_id); ?>.jpg" rel="user">
-                    </div>
-                    <div class="userTxt">
-                        <span class="fullname"><?php echo htmlspecialchars($fullname); ?></span>
-                        <i class="fa fa-chevron-right"></i><br>
-                        <span class="username"><?php echo htmlspecialchars($student_id); ?></span>
-                    </div>
-                </div>
-                <!-- /userInfo -->
+<div id="profile">
+    <div class="wrapper20">
+        <div class="userInfo">
+            <div class="userImg">
+                <img src="images/user/<?php echo htmlspecialchars($student_id); ?>.jpg" rel="user">
+            </div>
+            <div class="userTxt">
+                <span class="fullname"><?php echo htmlspecialchars($fullname); ?></span>
+                <i class="fa fa-chevron-right"></i><br>
+                <span class="username"><?php echo htmlspecialchars($student_id); ?></span>
             </div>
         </div>
-        <!-- /profile -->
+        <!-- /userInfo -->
     </div>
-    <!-- /top -->
+</div>
+<!-- /profile -->
+</div>
+<!-- /top -->
 
-    <div id="sidebar">
-        <ul class="mainNav">
-            <li>
-                <a href="dashboard.php">
-                    <i class="fa fa-home"></i><br>Dashboard</a>
-            </li>
-            <li>
-                <a href="profile.php">
-                    <i class="fa fa-user"></i><br>My Profile</a>
-            </li>
-            <li class="active">
-                <a href="#">
-                    <i class="fa fa-book"></i><br>My Course</a>
-            </li>
-            <li>
-                <a href="Meeting.php">
-                    <i class="fa fa-calendar"></i><br>Meetings</a>
-                <span class="badge badge-mNav">4</span>
-            </li>
-            <li>
-                <a href="ghocs.php">
-                    <i class="fa fa-trophy"></i><br>GHOCs</a>
-            </li>
-        </ul>
+<div id="sidebar">
+    <ul class="mainNav">
+        <li>
+            <a href="dashboard.php">
+                <i class="fa fa-home"></i><br>Dashboard</a>
+        </li>
+        <li>
+            <a href="profile.php">
+                <i class="fa fa-user"></i><br>My Profile</a>
+        </li>
+        <li class="active">
+            <a href="#">
+                <i class="fa fa-book"></i><br>My Course</a>
+        </li>
+        <li>
+            <a href="Meeting.php">
+                <i class="fa fa-calendar"></i><br>Meetings</a>
+            <span class="badge badge-mNav">4</span>
+        </li>
+        <li>
+            <a href="ghocs.php">
+                <i class="fa fa-trophy"></i><br>GHOCs</a>
+        </li>
+    </ul>
+</div>
+<!-- /sidebar -->
+
+<div id="main" class="clearfix">
+    <div class="secInfo">
+        <h1 class="secTitle">My Course</h1>
+        <span class="secExtra">View taken subjects</span>
     </div>
-    <!-- /sidebar -->
 
-    <div id="main" class="clearfix">
-        <div class="secInfo">
-            <h1 class="secTitle">My Course</h1>
-            <span class="secExtra">View taken subjects</span>
-        </div>
-
-        <div class="fluid">
-            <div class="widget leftcontent grid12">
-                <div class="widget-header">
-                    <h3 class="widget-title">Student Details</h3>
-                </div>
-                <div class="widget-content pad20f">
-                    <p>
-                        <label class="student-details">Student ID:</label>
-                        <p><?php echo htmlspecialchars($student_id); ?></p>
-                        <label class="student-details">Name:</label>
-                        <p><?php echo htmlspecialchars($fullname); ?></p>
-                        <label class="student-details">Level of Study:</label>
-                        <p><?php echo htmlspecialchars($level_of_study); ?></p>
-                        <label class="student-details">Institute:</label>
-                        <p><?php echo htmlspecialchars($institute); ?></p>
-                        <label class="student-details">Programme:</label>
-                        <p><?php echo htmlspecialchars($programme); ?></p>
-                        <label class="student-details">Semester:</label>
-                        <p><?php echo htmlspecialchars($semester); ?></p>
-                    </p>
-                </div>
-                <!-- /widget-content -->
+    <div class="fluid">
+        <div class="widget leftcontent grid12">
+            <div class="widget-header">
+                <h3 class="widget-title">Student Details</h3>
             </div>
-            <!-- /widget -->
+            <div class="widget-content pad20f">
+                <p>
+                    <label class="student-details">Student ID:</label>
+                    <p><?php echo htmlspecialchars($student_id); ?></p>
+                    <label class="student-details">Name:</label>
+                    <p><?php echo htmlspecialchars($fullname); ?></p>
+                    <label class="student-details">Level of Study:</label>
+                    <p><?php echo htmlspecialchars($level_of_study); ?></p>
+                    <label class="student-details">Institute:</label>
+                    <p><?php echo htmlspecialchars($institute); ?></p>
+                    <label class="student-details">Programme:</label>
+                    <p><?php echo htmlspecialchars($programme); ?></p>
+                    <label class="student-details">Semester:</label>
+                    <p><?php echo htmlspecialchars($semester); ?></p>
+                </p>
+            </div>
+            <!-- /widget-content -->
         </div>
-        <!-- /fluid -->
+        <!-- /widget -->
+    </div>
+    <!-- /fluid -->
 
-        <div class="fluid">
-            <div class="widget leftcontent grid12">
-                <div class="widget-header">
-                    <h3 class="widget-title">Registered Courses</h3>
-                </div>
-                <div class="widget-content">
+    <div class="fluid">
+        <div class="widget leftcontent grid12">
+            <div class="widget-header">
+                <h3 class="widget-title">Registered Courses</h3>
+            </div>
+            <div class="widget-content">
+                <?php if (!empty($error_message)) : ?>
+                    <br />
+                    <div class="alert alert-danger">
+                        <strong>Uh Oh!</strong> <?php echo $error_message; ?>
+                    </div>
+                <?php else : ?>
                     <table class="table-registered-subject">
                         <tr>
                             <th class="th-registered-subject">Course Code</th>
@@ -196,7 +208,7 @@ $stmt_courses->close();
                             <th class="th-registered-subject">Group</th>
                             <th class="th-registered-subject">Lab Group</th>
                         </tr>
-                        <?php foreach ($registered_courses as $course): ?>
+                        <?php foreach ($registered_courses as $course) : ?>
                             <tr>
                                 <td class='td-registered-subject'><?php echo htmlspecialchars($course[0]); ?></td>
                                 <td class='td-registered-subject'><?php echo htmlspecialchars($course[1]); ?></td>
@@ -207,15 +219,16 @@ $stmt_courses->close();
                         <?php endforeach; ?>
                     </table>
                     <p class="total-cr">Total Credit Hours: <?php echo $total_credit_hours; ?></p>
-                </div>
-                <!-- /widget-content -->
+                <?php endif; ?>
             </div>
-            <!-- /widget -->
+            <!-- /widget-content -->
         </div>
-        <!-- /fluid -->
-
+        <!-- /widget -->
     </div>
-    <!-- /main -->
+    <!-- /fluid -->
+
+</div>
+<!-- /main -->
 
 </div>
 <!-- /wrapper -->
@@ -237,3 +250,4 @@ $stmt_courses->close();
 
 </body>
 </html>
+
