@@ -142,7 +142,7 @@ $stmt_courses->close();
                 <span class="badge badge-mNav">4</span>
             </li>
             <li>
-                <a href="ghocs.html">
+                <a href="ghocs.php">
                     <i class="fa fa-trophy"></i><br>GHOCs</a>
             </li>
         </ul>
