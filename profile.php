@@ -98,7 +98,7 @@ $stmt->close();
             </li>
             <li>
                 <a href="meeting.php">
-                    <i class="fa fa-calendar"></i><br>Meetings</a>
+                    <i class="fa fa-calendar"></i><br>Timetable</a>
                 <span class="badge badge-mNav">4</span>
             </li>
             <li>
