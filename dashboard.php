@@ -210,6 +210,7 @@ $conn->close();
 <!-- /wrapper -->
 
 <div class="clearfix"></div>
+<?php include 'includes/footer.html';?>
 
 <script type="text/javascript" src="js/prefixfree.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
