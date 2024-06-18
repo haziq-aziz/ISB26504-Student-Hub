@@ -32,7 +32,7 @@ try {
                 $_SESSION['student_fullname'] = $fullname;
 
                 // Redirect to profile page
-                header("Location: ../profile.php");
+                header("Location: ../dashboard.php");
                 exit();
             } else {
                 // Invalid email or password
