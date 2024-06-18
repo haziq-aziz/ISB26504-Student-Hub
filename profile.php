@@ -122,7 +122,6 @@ $stmt->close();
                     <div class="image-placeholder large">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Profile Picture">
                     </div>
-                    <button class="btn btn-primary">Edit</button>
                 </div>
                 <div class="details-student">
                     <p><?php echo htmlspecialchars($fullname); ?></p>
