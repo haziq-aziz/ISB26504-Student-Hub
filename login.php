@@ -25,11 +25,11 @@
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" name="email" placeholder="Enter your email" required>
+                            <input type="text" name="email" placeholder="Enter your email">
                         </div>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="password" placeholder="Enter your password" required>
+                            <input type="password" name="password" placeholder="Enter your password">
                         </div>
                         <div class="text"><a href="#">Forgot password?</a></div>
                         <div class="button">
@@ -39,7 +39,7 @@
                 </form>
                 <?php
                 if (isset($_GET['error'])) {
-                    echo "<div class='error'>Invalid email or password</div>";
+                    echo "<div class='error'><p>Invalid email or password</p></div>";
                 }
                 ?>
             </div>
