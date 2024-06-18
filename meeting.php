@@ -1,9 +1,39 @@
+<?php
+session_start();
+if (!isset($_SESSION['studentid'])) {
+    header("Location: login.php");
+    exit();
+}
+
+require_once '../db_connection.php';
+
+// Example studentid (replace with actual logic to get studentid dynamically)
+$studentid = $_SESSION['studentid'];
+
+// Fetch student information (full name and student ID)
+$sql_student = "SELECT fullname, studentid FROM student WHERE studentid = '$studentid'";
+$result_student = $conn->query($sql_student);
+
+if ($result_student->num_rows > 0) {
+    $student = $result_student->fetch_assoc();
+    $fullname = $student['fullname'];
+    $studentid_display = $student['studentid'];
+} else {
+    // Handle case where student information is not found
+    $fullname = "Student Name"; // Default value if not found
+    $studentid_display = "@studentid"; // Default value if not found
+}
+
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Novus Admin Theme | Messages</title>
+		<title>UniKL Hub - My Timetable</title>
 
 		<link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-ipad-retina.png"/>
 		<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-iphone-retina.png"/>
@@ -219,20 +249,22 @@
 				<!-- /topBar -->
 
 				<div id="profile">
-					<div class="wrapper20">
-						<div class="userInfo">
-							<div class="userImg">
-								<img src="images/user.jpg" rel="user">
-							</div>
-							<div class="userTxt">
-								<span class="fullname">Ahmad Haziq Bin Abdul Aziz</span>
-								<i class="fa fa-chevron-right"></i><br>
-								<span class="username">52213122387</span>
-							</div>
-						</div>
-						<!-- /userInfo -->
-					</div>
-				</div>
+            <div class="wrapper20">
+                <div class="userInfo">
+                    <div class="userImg">
+                        <img src="images/user/<?php echo htmlspecialchars($studentid); ?>.jpg" rel="user">
+                    </div>
+                    <div class="userTxt">
+                        <span class="fullname"><?php echo htmlspecialchars($fullname); ?></span>
+                        <i class="fa fa-chevron-right"></i><br>
+                        <span class="username"><?php echo htmlspecialchars($studentid); ?></span>
+                    </div>
+                </div>
+                <!-- /userInfo -->
+
+                <i class="fa fa-bars icon-nav-mobile"></i>
+            </div>
+        </div>
 				<!-- /profile -->
 			</div>
 			<!-- /top -->
@@ -253,7 +285,7 @@
 					</li>
 					<li class="active">
 						<a href="#">
-							<i class="fa fa-calendar"></i><br>Meetings</a>
+							<i class="fa fa-calendar"></i><br>Timetable</a>
 						
 					</li>
 					<li>
