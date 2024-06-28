@@ -6,6 +6,7 @@ if (!isset($_SESSION['studentid'])) {
 }
 
 require_once '../../db_connection.php';
+require_once 'Exception.php';
 
 $studentid = $_SESSION['studentid'];
 
@@ -26,12 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     header("Location: ../ghocs.php");
                     exit();
                 } else {
-                    throw new Exception("An error occurred while leaving the club.");
+                    throw new ClubException("An error occurred while leaving the club.");
                 }
             } else {
-                throw new Exception("Failed to prepare the SQL statement.");
+                throw new ClubException("Failed to prepare the SQL statement.");
             }
-        } catch (Exception $e) {
+        } catch (ClubException $e) {
             $_SESSION['error_message'] = $e->getMessage();
             header("Location: ../ghocs.php");
             exit();

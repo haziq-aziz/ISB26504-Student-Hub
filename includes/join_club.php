@@ -6,6 +6,7 @@ if (!isset($_SESSION['studentid'])) {
 }
 
 require_once '../../db_connection.php';
+require_once 'Exception.php';
 
 $studentid = $_SESSION['studentid'];
 
@@ -13,14 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['clubid'])) {
         $clubid = $_POST['clubid'];
         $join_date = date('Y-m-d'); // Get the current date
-        $role = 'Member'; // Default role value, adjust as needed
+        $role = 'Member'; // Default role value
 
         try {
             // Prepare the SQL statement to insert the record into the club_student table
             $sql = "INSERT INTO club_student (studentid, clubid, role, join_date) VALUES (?, ?, ?, ?)";
             
             if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("siss", $studentid, $clubid, $role, $join_date); // Assuming clubid is integer
+                $stmt->bind_param("siss", $studentid, $clubid, $role, $join_date); 
 
                 if ($stmt->execute()) {
                     // Redirect to the page with a success message
@@ -28,12 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     header("Location: ../ghocs.php");
                     exit();
                 } else {
-                    throw new Exception("An error occurred while joining the club.");
+                    throw new ClubException("An error occurred while joining the club.");
                 }
             } else {
-                throw new Exception("Failed to prepare the SQL statement.");
+                throw new ClubException("Failed to prepare the SQL statement.");
             }
-        } catch (Exception $e) {
+        } catch (ClubException $e) {
             $_SESSION['error_message'] = $e->getMessage();
             header("Location: ../ghocs.php");
             exit();
