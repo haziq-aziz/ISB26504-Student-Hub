@@ -6,6 +6,7 @@ if (!isset($_SESSION['studentid'])) {
 }
 
 require_once '../db_connection.php';
+require_once 'includes/Exception.php';
 
 $studentid = $_SESSION['studentid'];
 
@@ -42,7 +43,7 @@ try {
     } else {
         $_SESSION['error_messages'] = "You have not registered for any courses yet.";
     }
-} catch (Exception $e) {
+} catch (EnrolledCourseException $e) {
     $_SESSION['error_messages'] = "Failed to fetch courses: " . $e->getMessage();
 }
 
